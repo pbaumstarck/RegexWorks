@@ -41,10 +41,29 @@ body {
   text-decoration: underline;
 }
 
-.twitter-link {
+.right-link {
   float: right;
+  margin: 0 5px;
 }
 
+.right-link.own-link {
+  /*background: gray;*/
+  /*border: 1px solid gray;*/
+  /*border-radius: 5px;*/
+  padding: 0 3px;
+}
+
+.right-link.own-link a,
+.right-link.own-link a:active,
+.right-link.own-link a:active,
+.right-link.own-link a:active {
+  color: #EBA271;
+  text-decoration: none;
+}
+.right-link.own-link a:hover {
+  color: #EBA271;
+  text-decoration: underline;
+}
 
 
 .demo-bar {

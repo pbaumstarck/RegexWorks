@@ -11,7 +11,7 @@
     <script type="text/javascript" src="/lib/underscore.min.js"></script>
     <script type="text/javascript" src="/js/main.js"></script>
   </head>
-  <bod ng-controller="RegexWorksCtrl">
+  <body ng-controller="RegexWorksCtrl">
     <div class="projects-bar">
       <span class="header">
         Others:
@@ -19,9 +19,15 @@
       <span class="project">
         <a href="http://nyanbars.itsagoldenage.com/">Nyan Bars</a>
       </span>
-      <span class="twitter-link">
-        <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://regexworks.itsagoldenage.com" data-text="Regular expression test lab for the win:">Tweet</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+      <span class="right-link twitter-link">
+        <span><a href="https://twitter.com/share" class="twitter-share-button" data-url="http://regexworks.itsagoldenage.com" data-text="Regular expression test lab for the win:">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></span>
+      </span>
+      <span class="right-link own-link">
+        <a href="https://github.com/pbaumstarck/RegexWorks#regexworks"><span id="source-link">Source</span></a>
+      </span>
+      <span class="right-link own-link">
+        <a href="http://webronomicon.blogspot.com/2014/03/regexworks.html"><span id="blog-link">Blog</span></a>
       </span>
     </div>
     <div class="demo-bar" ng-init="showDemo = false; demoText = 'more';">
