@@ -1,0 +1,256 @@
+<!doctype html>
+<html ng-app="regexworks">
+  <head>
+    <title>Regex Works</title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.2/angular.min.js"></script>
+    <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.7.0.js"></script>
+
+    <script type="text/javascript" src="/lib/underscore.min.js"></script>
+    <script type="text/javascript" src="/js/main.js"></script>
+  </head>
+  <bod ng-controller="RegexWorksCtrl">
+    <div class="projects-bar">
+      <span class="header">
+        Others:
+      </span>
+      <span class="project">
+        <a href="http://nyanbars.itsagoldenage.com/">Nyan Bars</a>
+      </span>
+      <span class="twitter-link">
+        <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://regexworks.itsagoldenage.com" data-text="Regular expression test lab for the win:">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+      </span>
+    </div>
+    <div class="demo-bar" ng-init="showDemo = false; demoText = 'more';">
+      <span class="header">
+        REGEXWORKS
+      </span>
+      <span>
+        is a regular expression test lab.
+        <a href="http://webronomicon.blogspot.com/2014/03/regexworks.html">Blog</a>.
+      </span>
+      <span>
+        (<a href="#" ng-click="showDemo = !showDemo; demoText = demoText == 'more' ? 'less' : 'more'">{{ demoText }}</a>)
+      </span>
+      <span>
+        <span class="my-button" ng-click="loadDemo()"
+              popover-trigger="mouseenter" popover-placement="right"
+              popover="To clear all input and regexes">Clear All</span>
+      </span>
+      <div ng-if="showDemo">
+        <p>Here's what you do:</p>
+        <ol>
+          <li>Paste in some input text to work with.</li>
+          <li>Choose how to break your input up. The default is by lines, but you can use a custom delimiter.</li>
+          <li>Add regular expressions to filter and transform the input chunks.</li>
+          <li>View the processed output, and debug using the detailed breakdown below.</li>
+        </ol>
+        <p>Here's some demo setups you can try out:</p>
+        <div>
+          <div class="demo-link">
+            <a ng-click="loadDemo(1)">Demo 1</a> &ndash; Typical 'foo' and 'bar' example.
+          </div>
+          <div class="demo-link">
+            <a ng-click="loadDemo(2)">Demo 2</a> &ndash; Hamlet's most famous soliloquy.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="regex-works">
+      <div class="regexes">
+        <div class="header-bar">
+          <div class="header">
+            REGEXES
+          </div>
+          <div class="top-buttons">
+            <div class="my-button" ng-click="addNewRegex()"
+                 popover-trigger="mouseenter" popover-placement="right"
+                 popover="Add another regex">+</div>
+          </div>
+        </div>
+        <div class="body">
+          <div class="regex" ng-repeat="regex in regexes">
+            <div class="top-bar">
+              <div class="left controls">
+                <div class="flowing">
+                  <span class="regex-number">#{{ $index + 1 }}</span>
+                  <input id="regex-enabled-{{ regex.id }}" type="checkbox"
+                         ng-model="regex.enabled">
+                  <label for="regex-enabled-{{ regex.id }}">Enabled</label>
+                </div>
+              </div>
+              <div class="right">
+                <div class="my-button" ng-click="moveRegex(regex, false)"
+                     popover-trigger="mouseenter" popover-placement="bottom"
+                     popover="Move regex left">&larr;</div>
+                <div class="my-button" ng-click="moveRegex(regex, true)"
+                     popover-trigger="mouseenter" popover-placement="bottom"
+                     popover="Move regex right">&rarr;</div>
+                <div class="my-button" ng-click="removeRegex(regex)"
+                     popover-trigger="mouseenter" popover-placement="bottom"
+                     popover="Remove this regex">x</div>
+              </div>
+            </div>
+            <div class="controls">
+              <div class="flowing">
+                <input id="regex-kind-{{ regex.id }}-match" type="radio"
+                       ng-model="regex.kind" value="{{ RegexKind.MATCH }}">
+                <label for="regex-kind-{{ regex.id }}-match">Match</label>
+
+                <input id="regex-kind-{{ regex.id }}-replace" type="radio"
+                       ng-model="regex.kind" value="{{ RegexKind.REPLACE }}">
+                <label for="regex-kind-{{ regex.id }}-replace">Replace</label>
+              </div>
+            </div>
+            <div class="controls">
+              <div class="flowing">
+                <input id="regex-case-{{ regex.id }}" type="checkbox"
+                       ng-model="regex.caseSensitive">
+                <label for="regex-case-{{ regex.id }}">Case sensitive</label>
+
+                <input id="regex-global-{{ regex.id }}" type="checkbox"
+                       ng-model="regex.globalReplace"
+                       ng-disabled="regex.kind != RegexKind.REPLACE">
+                <label for="regex-global-{{ regex.id }}">Global replace</label>
+              </div>
+              <br>
+              <div>
+                <div class="input-left-label">Regex</div>
+                <input type="text" ng-model="regex.regex"></input>
+              </div>
+              <div>
+                <div class="input-left-label">Replacement</div>
+                <input type="text" ng-model="regex.replacement"
+                       ng-disabled="regex.kind != RegexKind.REPLACE"></input>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="input-output">
+        <div class="headers">
+          <div class="left-column">
+            <div class="header">
+              INPUT
+            </div>
+          </div>
+          <div class="right-column">
+            <div class="header">
+              OUTPUT
+            </div>
+          </div>
+        </div>
+        <div class="controls info">
+          <div class="left-column controls">
+            <div class="flowing">
+              <span>Split on:</span>
+              <input id="splitter-newlines" type="radio" ng-model="splitter"
+                     value="newlines">
+              <label for="splitter-newlines">Newlines</label>
+              <input id="splitter-regex" type="radio" ng-model="splitter"
+                     value="regex">
+              <label for="splitter-regex">Custom regex:</label>
+              <input type="text" ng-model="splitterRegex"></input>
+            </div>
+          </div>
+          <div class="right-column controls">
+            <!-- <div class="flowing">
+              <input id="show-processed-input-checkbox" type="checkbox"
+                     ng-model="showProcessedInput">
+              <label for="show-processed-input-checkbox">Show debug output</label>
+            </div> -->
+          </div>
+        </div>
+        <div class="textareas">
+          <div class="left-column">
+            <textarea ng-model="input" name="input" rows="10"></textarea>
+          </div>
+          <div class="right-column">
+            <textarea ng-model="output" name="output" rows="10"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="processed-input" ng-show="showProcessedInput">
+        <div class="header">
+          DEBUG OUTPUT
+        </div>
+        <div class="left-column controls">
+          <div class="legend">
+            <span>Legend:</span>
+            <div class="flowing">
+              <span class="left half light match-light true"></span>
+              <span class="right half light match-light false"></span>
+              <label>Regex matched/did not match string</label>
+            </div>
+
+            <div class="flowing">
+              <span class="left half light replace-light true"></span>
+              <span class="right half light replace-light false"></span>
+              <label>Regex transformed/did not transform string</label>
+            </div>
+
+            <div class="flowing">
+              <span class="left half light alive-light true"></span>
+              <span class="right half light alive-light false"></span>
+              <label>Line is/isn't in output</label>
+            </div>
+
+            <div class="flowing">
+              <span class="full light disabled-light"></span>
+              <label>Regex is disabled</label>
+            </div>
+          </div>
+        </div>
+        <div class="body">
+          <table>
+            <tr>
+              <th class="line">
+                <span>Line</span>
+                <span class="regex-number-header">Regex:</span>
+              </th>
+              <th ng-repeat="regex in regexes">
+                #{{ $index + 1 }}
+              </th>
+              <th>
+                In Output
+              </th>
+            </tr>
+            <tr ng-repeat="line in lines">
+              <td class="line">
+                {{ line.text }}
+              </td>
+              <td ng-repeat="regexStatus in line.regexStatuses">
+                <span ng-if="!regexStatus.regex.enabled">
+                  <span class="full light disabled-light"
+                        popover-trigger="mouseenter" popover-placement="bottom"
+                        popover="Regex is disabled"></span>
+                </span>
+                <span ng-if="regexStatus.regex.enabled">
+                  <span ng-if="regexStatus.regex.kind == RegexKind.MATCH"
+                        class="full light match-light {{ regexStatus.matched }}"
+                        popover-trigger="mouseenter" popover-placement="bottom"
+                        popover-title="{{ getRegexStatusTooltip(regexStatus, true) }}"
+                        popover="{{ getRegexStatusTooltip(regexStatus, false) }}"></span>
+                  <span ng-if="regexStatus.regex.kind == RegexKind.REPLACE"
+                        class="full light replace-light {{ regexStatus.matched }}"
+                        popover-trigger="mouseenter" popover-placement="bottom"
+                        popover-title="{{ getRegexStatusTooltip(regexStatus, true) }}"
+                        popover="{{ getRegexStatusTooltip(regexStatus, false) }}"></span>
+                </span>
+              </td>
+              <td>
+                <span class="full light alive-light {{ line.alive }}"
+                      popover-trigger="mouseenter" popover-placement="bottom"
+                      popover-title="{{ line.alive ? 'In Output' : 'Not in Output' }}"
+                      popover="{{ line.currentText }}"></span>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

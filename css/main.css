@@ -1,0 +1,247 @@
+/**
+ * Copyright 2014 Paul G. Baumstarck
+ * MIT License
+ */
+
+* {
+  font-family: Verdana;
+  font-size: small;
+}
+
+body {
+  margin: 0;
+  padding: 0 !important;
+}
+
+
+/** Project bar styles. */
+
+.projects-bar {
+  background: #555;
+  color: white;
+  font-family: Verdana;
+  font-weight: normal;
+  padding: 5px;
+}
+
+.projects-bar .project {
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.projects-bar .project a:active,
+.projects-bar .project a:link,
+.projects-bar .project a:visited {
+  color: #EBA271;
+  text-decoration: none;
+}
+
+.projects-bar .project a:hover {
+  color: #EBA271;
+  text-decoration: underline;
+}
+
+.twitter-link {
+  float: right;
+}
+
+
+
+.demo-bar {
+  padding: 15px;
+}
+
+
+.regex-works > div {
+  clear: both;
+  padding: 10px;
+}
+
+.header {
+  font-family: "BebasNeue", sans-serif;
+  font-size: smaller;
+  font-weight: bold;
+}
+
+.controls .flowing > * {
+  float: left;
+  margin-right: 5px;
+}
+
+.regexes .header-bar > div {
+  float: left;
+}
+
+.regexes .header-bar .header {
+  margin-left: 5px;
+  padding-top: 4px;
+}
+
+.regexes .body {
+  clear: both;
+}
+
+.regex {
+  background: #dadae2;
+  float: left;
+  margin: 5px;
+  padding: 10px;
+}
+
+.regex .regex-number {
+  font-weight: bold;
+}
+
+.regex .top-bar .left {
+  float: left;
+}
+
+.regex .top-bar .right {
+  float: right;
+}
+
+.regex .controls {
+  clear: both;
+}
+
+.my-button {
+  background: lightsteelblue;
+  float: left;
+  text-align: center;
+  padding: 3px 8px;
+  margin: 0 5px;
+}
+
+.my-button:hover {
+  background: darkblue;
+  color: #ccc;
+}
+
+.demo-bar .my-button {
+  float: none !important;
+}
+
+.regex .input-left-label {
+  clear: both;
+  float: left;
+  width: 100px;
+}
+
+.input-output {
+  clear: both;
+  /*padding: 10px;*/
+  width: 100%;
+}
+
+.input-output > div {
+  clear: both;
+  margin: 5px;
+  width: 100%;
+}
+
+.input-output .left-column,
+.input-output .right-column {
+  float: left;
+  width: 49%;
+}
+
+.input-output textarea {
+  width: 95%;
+}
+
+.processed-input {
+  padding-top: 25px !important;
+  margin: 15px 5px 0;
+}
+
+.processed-input .flowing {
+  clear: both;
+}
+
+.processed-input .regex-number-header {
+  float: right;
+}
+
+.processed-input .line {
+  min-width: 200px;
+  text-align: left;
+}
+
+.processed-input .body {
+  clear: both;
+}
+
+.processed-input table tr:nth-child(even) {
+  background: #eee;
+}
+
+.processed-input table tr:nth-child(even):hover {
+  background: #ccc;
+}
+
+.processed-input table tr:nth-child(odd):hover {
+  background: #ccc;
+}
+
+.done-true {
+  text-decoration: line-through;
+  color: grey;
+}
+
+.light {
+  display: inline-block;
+  height: 12px;
+  margin-top: 4px;
+}
+
+.full.light {
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  width: 20px;
+}
+
+.half.light {
+  width: 10px;
+}
+
+.left.half.light {
+  border-left: 1px solid lightgray;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  margin-right: 0;
+}
+
+.right.half.light {
+  border-right: 1px solid lightgray;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.match-light.false {
+  background: red;
+}
+
+.match-light.true {
+  background: green;
+}
+
+.replace-light.false {
+  background: gray;
+}
+
+.replace-light.true {
+  background: gold;
+}
+
+.alive-light.false {
+  background: black;
+}
+
+.alive-light.true {
+  background: blue;
+}
+
+.disabled-light {
+  background: white;
+  border: 1px solid gray !important;
+}
